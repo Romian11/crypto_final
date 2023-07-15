@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main{
+    background-color: #222222; 
+    height: 535vh;
+    width: auto;
+}
+
+
+.bottom{
+    min-height: 100vw;
+    /* height: 523vh; */
+    width: 95%;
+    border: 1px solid #4a4040;
+    margin-top: 80px ;
+    padding: 20px;
+   
+    
+
+}
+.searchbar{
+    
+    margin-top: 30px;
+    margin-left: 14px;
+    /* margin-right: -190px; */
+
+}
+.cards {
+    margin-top: 40px;
+    min-height: 100vh;
+    border-radius: 10px;
+    width: 95%;
+    height: fit-content;
+    padding: 10px;
+    display: grid;
+
+    justify-items: center;
+    grid-template-columns: repeat(3, 1fr);
+  
+  }
+.__card {
+
+    height: 30vh;
+    width: 28vw;
+    background-color: #1e1d1e;
+    border: 1px solid #413d3d;
+    margin: 10px;
+  
+  }
+  .__card:hover {
+    filter: brightness(150%);
+  }

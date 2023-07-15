@@ -235,7 +235,7 @@ border-bottom: 1px solid rgba(70, 70, 70, 0.61);
 .quantity{
 margin-left: 67px;
 width: 50px;
-/* background-color: #fff; */
+
    
 }
 .buying_price{
@@ -243,7 +243,6 @@ width: 50px;
 margin-left: 263px;
 width: 50px;
 
-/* background-color: #fff; */
 }
 #portfolioContainer {
   height: 300px;

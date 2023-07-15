@@ -63,7 +63,7 @@ buybtn.addEventListener("click", (event) => {
       .then((snapshot) => {
         if (snapshot.exists()) {
           const userData = snapshot.val();
-          const currBalance = userData.curr_balance;
+          const currBalance = parseFloat(userData.curr_balance);
           const invested = parseFloat(userData.invested);
        
          var qty = 0 ;      

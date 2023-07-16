@@ -1,13 +1,11 @@
 const login_btn = document.getElementById("btn_signup");
 const signup_btn = document.getElementById("btn_login");
 
-
 const buttons_login = document.getElementsByClassName("buttons_login");
 
 var user = localStorage.getItem("login_info");
 
 const logout_btn = document.getElementById("logout_btn");
-
 
 function login() {
   user = JSON.parse(user);
@@ -50,12 +48,10 @@ login_btn.addEventListener("click", () => {
     localStorage.removeItem("login_info");
     // location.reload();
     login_btn.innerHTML = "Log In";
-    signup_btn.style.display = "block";
+    signup_btn.style.display ="block";
   } else window.location = "/login";
 });
-
 
 function return_home() {
   window.location.href = "/";
 }
-

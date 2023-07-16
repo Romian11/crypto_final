@@ -17,13 +17,13 @@
     margin: 0; }
   </style>
 
-  <script>
+  {{!-- <script>
  
      const numberInput = document.getElementById("myNumberInput"); // Disable the increment and
     numberInput.addEventListener("focus", function () {
     this.addEventListener("keydown", function (event) { if (event.which === 38
     || event.which === 40) { event.preventDefault(); } }); });
-  </script>
+  </script> --}}
   <body>
     
     <span class="main">
@@ -46,6 +46,7 @@
 <p class="button-17" style="width:250px height:50px;" id="trade2">Loading...</p>
 <h6>Quantity</h6>
 <input type="number" name="" id="amount" class="button-17" placeholder="Amount In USD" style="width: 250px;">
+<span class="qtyavailable">Quantity Available : <span id="qty_avail">qty</span></span>
 <div class="btn" >
 <span id="buy_btn">{{>buybtn text="Buy" }}</span>
   <span id="sell_btn">{{>buybtn text="sell"}}</span>

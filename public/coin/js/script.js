@@ -1,10 +1,15 @@
+
+
+
+
+
 var z = 0;
 const queryString = window.location.search;
 
 const searchParams = new URLSearchParams(queryString);
 
 const coinname = searchParams.get('tvwidgetsymbol');
-// const x = window.Location;
+
 
 const lower_src = coinname.toLowerCase();
 let ws1 = new WebSocket(`wss://stream.binance.com:9443/ws/${lower_src}@trade`);
@@ -37,6 +42,57 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getDatabase(app);
+
+
+
+window.onload = function() {
+
+  var user = localStorage.getItem("login_info");
+ 
+  if (user == null) {
+    alert("Please login first");
+  } 
+  else {
+
+      const user = JSON.parse(localStorage.getItem("login_info"));
+      const email = user.email;
+      const sanitizedEmail = email.replace(".", "_");
+      const referencePath = "users/" + sanitizedEmail+"/"+"holding/"+coinname;
+      const userRef = ref(db, referencePath);
+console.log(referencePath);
+      const avail_qty = document.getElementById('qty_avail');
+      get(userRef)
+      .then((snapshot) => {
+        
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+          const qty_avail = userData.qty; 
+          if(qty_avail==null)qty_avail=0;
+          console.log(qty_avail);
+          avail_qty.innerText = qty_avail.toFixed(3) 
+      }
+      else{
+        avail_qty.innerText = "0";
+      }
+  }).catch((error) => {
+    // Handle any errors that occurred during the database operation
+    console.error("Error fetching data:", error);
+  });
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 const buybtn = document.getElementById("buy_btn");
 const sellbtn = document.getElementById("sell_btn");
@@ -114,6 +170,12 @@ buybtn.addEventListener("click", (event) => {
                 .catch((error) => {
                   console.error("Error adding new holding:", error);
                 });
+                window.location.reload();
+
+                // window.location = "./../dashboard";
+
+        //location.reload();
+
             }
             
           // }
@@ -202,6 +264,13 @@ sellbtn.addEventListener("click", (event) => {
                 .catch((error) => {
                   console.error("Error adding new holding:", error);
                 });
+                window.location.reload();
+
+                // window.location = "./../dashboard";
+
+        //location.reload();
+
+
             }
             
           // }

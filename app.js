@@ -1,8 +1,9 @@
 const express = require("express");
-
 const hbs = require("hbs");
 const path = require("path");
 const app = express();
+const axios = require('axios');
+
 
 const port = process.env.PORT || 3000;
 const partial_path = path.join(__dirname, "./views/partials");
@@ -13,18 +14,26 @@ app.set("views", "./views");
 app.set("views", path.join(__dirname, "./views"));
 app.set("view engine", "hbs");
 
-app.get("/", (req, res) => {
-  
-    
+app.get("/crypto_home", (req, res) => {
   // res.render("index.hbs" , {arr});
-  res.render("index.hbs" );
+  res.render("crypto/index.hbs");
+});
+app.get("/", (req, res) => {
+  res.render("start.hbs");
 });
 
 app.get("/coin", (req, res) => {
   const input = req.query.tvwidgetsymbol;
-  
-  res.render("detailedview.hbs", { src: input });
 
+  res.render("crypto/detailedview.hbs", { src: input });
+});
+
+app.get("/stock_home", (req, res) => {
+  res.render("stock/stock_start.hbs");
+});
+app.get("/stock_detailed_view", (req, res) => {
+  const input = req.query.tvwidgetsymbol;
+  res.render("stock/stock_detailed_view.hbs", { src: input });
 });
 
 app.get("/login", (req, res) => {
@@ -40,17 +49,63 @@ app.get("/details", (req, res) => {
   res.render("start_detail.hbs");
 });
 app.get("/wallet", (req, res) => {
-  res.render("wallet.hbs");
+  res.render("crypto/wallet.hbs");
 });
 app.get("/dashboard", (req, res) => {
-  res.render("dashboard.hbs");
+  res.render("crypto/dashboard.hbs");
+});
+app.get("/stock_wallet", (req, res) => {
+  res.render("stock/wallet.hbs");
+});
+app.get("/stock_dashboard", (req, res) => {
+  res.render("stock/dashboard.hbs");
 });
 const arr = [
-  "BTCUSDT","ETHUSDT","BNBUSDT","USDTUSDT","ADAUSDT","XRPUSDT","DOGEUSDT","DOTUSDT","BCHUSDT","LTCUSDT","LINKUSDT","XLMUSDT","USDCUSDT","VETUSDT","THETAUSDT","FILUSDT","TRXUSDT","EOSUSDT","XMRUSDT","AAVEUSDT","ATOMUSDT","XTZUSDT","NEOUSDT","CROUSDT","UMAUSDT","XEMUSDT","DAIUSDT","MKRUSDT","SUSHIUSDT","FTTUSDT","COMPUSDT","TFUELUSDT","BTTUSDT","ALGOUSDT","DASHUSDT","ENJUSDT","SNXUSDT","HBARUSDT","ZECUSDT","ONTUSDT","REVUSDT","DCRUSDT"]
+  "BTCUSDT",
+  "ETHUSDT",
+  "BNBUSDT",
+  "USDTUSDT",
+  "ADAUSDT",
+  "XRPUSDT",
+  "DOGEUSDT",
+  "DOTUSDT",
+  "BCHUSDT",
+  "LTCUSDT",
+  "LINKUSDT",
+  "XLMUSDT",
+  "USDCUSDT",
+  "VETUSDT",
+  "THETAUSDT",
+  "FILUSDT",
+  "TRXUSDT",
+  "EOSUSDT",
+  "XMRUSDT",
+  "AAVEUSDT",
+  "ATOMUSDT",
+  "XTZUSDT",
+  "NEOUSDT",
+  "CROUSDT",
+  "UMAUSDT",
+  "XEMUSDT",
+  "DAIUSDT",
+  "MKRUSDT",
+  "SUSHIUSDT",
+  "FTTUSDT",
+  "COMPUSDT",
+  "TFUELUSDT",
+  "BTTUSDT",
+  "ALGOUSDT",
+  "DASHUSDT",
+  "ENJUSDT",
+  "SNXUSDT",
+  "HBARUSDT",
+  "ZECUSDT",
+  "ONTUSDT",
+  "REVUSDT",
+  "DCRUSDT",
+];
 app.get("/viewmore", (req, res) => {
-
-  res.render("viewmore.hbs", { arr: arr });
-
+  res.render("crypto/viewmore.hbs", { arr: arr });
 });
 
 app.listen(port);
